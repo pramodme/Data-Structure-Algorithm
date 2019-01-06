@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure for stack
+struct stack
+{
+    int top;
+    int capacity;
+    int *arr;
+};
+
+//  Creating a stck with a given capacity
+struct stack *createStack(int capacity)
+{
+    struct stack *newStack = (struct stack*)malloc(sizeof(struct stack));
+    newStack->capacity = capacity;
+    newStack->top = -1;
+    newStack->arr = (int *)malloc(capacity * sizeof(int));
+    return newStack;
+}
+
+// Checking Stack is full or not
+int isFull(struct stack *newStack)
+{
+    return (newStack->top == newStack->capacity - 1);
+}
+
+// Checking Stack is Empty or not
+int isEmpty(struct stack *newStack)
+{
+    return (newStack->top == -1);
+}
+
+
+// Removing data from stack
+int pop(struct stack *newStack)
+{
+    if(isEmpty(newStack))
+        return -1;
+    return newStack->arr[newStack->top--];
+}
+
+// Adding data into stack
+push(struct stack *newStack, int data)
+{
+    if(isFull(newStack))
+        return ;
+    newStack->arr[++newStack->top] = data;
+    printf("Pushed data : %d\n",data);
+}
+
+// main program
+int main() 
+{
+	struct stack *newStack = createStack(10);
+	push(newStack, 10);
+	push(newStack, 25);
+	
+	printf("Popped data : %d\n",pop(newStack));
+}
+
+
+Output :- 
+
+Pushed data : 10
+Pushed data : 25
+Popped data : 25
