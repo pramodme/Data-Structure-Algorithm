@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+// Structure to represent stack
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+// Creating a stack
+struct node *newNode(int data)
+{
+    struct node *stack = (struct node*)malloc(sizeof(struct node));
+    stack->data = data;
+    stack->next = NULL;
+    return stack;
+}
+
+// Checking Stack is Empty or not
+int isEmpty(struct node *root)
+{
+    return !root;
+}
+
+// Adding data into stack
+void push(struct node **root, int data)
+{
+    struct node *stack = newNode(data);
+    stack->next = *root;
+    *root = stack;
+    printf("Pushed data : %d\n",data);
+}
+
+// Removing data from stack
+int pop(struct node **root)
+{
+    if(isEmpty(root))
+        return INT_MIN;
+    
+    struct node *temp = *root;
+    *root = temp->next;
+    int dataPopped = temp->data;
+    free(temp);
+    return dataPopped;
+}
+
+// Finding top data in stack
+int peek(struct node *root)
+{
+    if(isEmpty(root))
+        return INT_MIN;
+    
+    return (root)->data;
+}
+
+// main program
+int main() 
+{
+	struct node *root = NULL;
+	push(&root, 10);
+	push(&root, 20);
+	
+	printf("Data Popped : %d\n",pop(&root));
+	printf("Top data in stack : %d\n",peek(root));
+	return 0;
+}
+
+Output : -
+Pushed data : 10
+Pushed data : 20
+Data Popped : 20
+Top data in stack : 10
